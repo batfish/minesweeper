@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Propane Language</title>
+    <title>Minesweeper</title>
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -48,7 +48,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand page-scroll" href="#page-top"><b>Propane</b></a>
+          <a class="navbar-brand page-scroll" href="#page-top"><b>Minesweeper</b></a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -57,8 +57,9 @@
             <li class="hidden">
               <a class="page-scroll" href="#page-top"></a>
             </li>
+            <li><a class="page-scroll" href="#installation">Installation</a></li>
             <li><a class="page-scroll" href="#overview">Overview</a></li>
-            <li><a class="page-scroll" href="#members">Members</a></li>
+            <li><a class="page-scroll" href="#members">Contributors</a></li>
             <li><a class="page-scroll" href="#publications">Publications</a></li>
           </ul>
         </div>
@@ -72,16 +73,11 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="jumbotron">
-              <img class="img-responsive center-block" src="img/propane-banner.png" style="max-width: 75%"/>
-              <p>a language for simple, <span style="color: #ff0000">correct-by-construction</span> network configuration</p>
+              <img class="img-responsive center-block" src="img/minesweeper-banner.png" style="max-width: 75%"/>
+              <p>A <span style="color: #ff0000">proactive</span> network analysis and bug-finding tool</p>
               <ul class="list-inline">
                 <li>
-                  <a class="btn btn-lg btn-primary" href="https://github.com/rabeckett/propane/" target="_blank">
-                  Tutorial »
-                  </a>
-                </li>
-                <li>
-                  <a class="btn btn-lg btn-warning" href="https://github.com/rabeckett/propane/" target="_blank">
+                  <a class="btn btn-lg btn-warning" href="https://github.com/batfish/batfish/tree/smt" target="_blank">
                   See on Github »
                   </a>
                 </li>
@@ -91,7 +87,46 @@
         </div>
       </div>
     </section>
-    <section id="overview" class="even-section">
+
+    <section id="installation" class="even-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-10 col-lg-offset-1">
+            <div class="page-header">
+              <h1>Installation</h1>
+            </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-lg-offset-1">
+            <p>To get started with Minesweeper, follow the steps below:</p>
+            &nbsp
+            <ol>
+              <li>Install the <a href="https://github.com/batfish/batfish/wiki">Batfish</a> analysis framework. This requires installations of Java 8 and Ant.</li>
+              &nbsp
+              <li>From the main batfish directory, checkout the <b>smt</b> branch from the Batfish repository, switch to this branch, and recompile Batfish (right).</li>
+            </ol>
+          </div>
+          <div class="col-lg-5">
+            <div class="panel panel-default raise-effect">
+              <div class="panel-heading">&nbsp</div>
+              <div class="panel-body code-snippet">
+
+                <pre>
+batfish: $ git checkout origin/smt
+batfish: $ git branch smt
+batfish: $ batfish_build_all
+                </pre>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview" class="odd-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
@@ -102,79 +137,190 @@
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 col-lg-offset-1">
-            <p>Overview here</p>
-            <ul>
-              <li><b>foo</b> bar</li>
-              <li><b>foo</b> bar</li>
-              <li><b>foo</b> bar</li>
-              <li><b>foo</b> bar</li>
-            </ul>
-            <h3>Subtitle</h3>
-            <p>More text here</p>
-            <h3>Related Projects</h3>
-            <p>Methane here?</p>
-            <ul></ul>
+          <div class="col-lg-11 col-lg-offset-1">
+            <p>Minesweeper lets you run a number of different <b>"what if"</b> analyses against unmodified router configurations. 
+            It can also take into account the possibility of eBGP messages from external peers as well as network link failures.</p>
+            
+            <h3>Loading Configurations</h3>
+            <p>To get started, lets consider running a reachability query on an example campus network.</p>
+            <p>The first step is to start up the Batfish service and load the configurations into Batfish.</p>
           </div>
-          <div class="col-lg-5">
+
+          &nbsp
+          <div class="col-lg-1"></div>
+          <div class="col-lg-8">
             <div class="panel panel-default raise-effect">
-              <div class="panel-heading">Example:</div>
+              <div class="panel-heading">&nbsp</div>
               <div class="panel-body code-snippet">
-
                 <pre>
-<span class="syntax-comment"># Define our function</span>
-<span class="syntax-keyword">define</span> Customer = {as101, as102, as103}
-<span class="syntax-keyword">define</span> Peer = Sprint + ATT
-<span class="syntax-keyword">define</span> Routing = {
-    <span class="syntax-asn">true</span> => Customer >> Peer
-}
-<span class="syntax-keyword">define</span> NoTransit = {
-    <span class="syntax-asn">true</span> => !transit(Peer,Peer)
-}
-<span class="syntax-keyword">define</span> Main = Routing & NoTransit
-                </pre>
+batfish: $ allinone -runmode interactive
+batfish> init_testrig test_rigs/smt-examples/CAMPUS3
+Uploaded testrig. Parsing now.
+Status: SUCCESS
+PARSING SUMMARY
+STATISTICS
+  Parsing results:
+    Parsed successfully: 13
 
+batfish>
+                </pre>
               </div>
             </div>
           </div>
+
+          <div class="col-lg-11 col-lg-offset-1">
+            <p>The first command starts Batfish in interactive mode. The second command instructs Batfish to use the collection of 
+              configurations in the CAMPUS3 directory. The CAMPUS3 example directory simply has a single folder named <b>configs/</b>
+              that contains all of the router configurations for the network. The topology will be inferred from the configurations.</p>
+            
+             <h3>Running a Query</h3>
+             Lets now check reachability to a destination port on the department router for the network border routers. This is done with 
+             the following command:
+          </div>
+
+          &nbsp
+          <div class="col-lg-1"></div>
+          <div class="col-lg-8">
+            <div class="panel panel-default raise-effect">
+              <div class="panel-heading">&nbsp</div>
+              <div class="panel-body code-snippet">
+                <pre>
+batfish> get smt-reachability ingressNodeRegex="as2border.*" | 
+finalNodeRegex="as2dept1" | finalIfaceRegex="FastEthernet1/0"
+
+=========================================
+Packet:
+---------------------
+dstIp: 2.128.0.0
+srcIp: 2.0.0.0
+
+Environment Messages:
+---------------------
+as2border2,FastEthernet1/0 (BGP):
+  community 3:2:
+  community as3_community:
+  prefix: 2.128.0.0/15
+  protocol metric: 51
+
+Final Forwarding:
+---------------------
+as2border1,FastEthernet0/1 --> as2core1,FastEthernet0/0
+as2border1,FastEthernet1/0 --> as2core2,FastEthernet0/1
+as2core1,FastEthernet1/0 --> as2dist2,FastEthernet0/1
+as2core2,FastEthernet1/0 --> as2dist1,FastEthernet0/0
+as2dept1,FastEthernet1/0 --> _,_
+as2dist1,FastEthernet1/0 --> as2dept1,FastEthernet0/0
+as2dist2,FastEthernet1/0 --> as2dept1,FastEthernet0/1
+=========================================
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-11 col-lg-offset-1">
+            <p>Here, Minesweeper is indicating that it found an example where one of the border routers will lose connectivity
+              to the destination port. First, the example includes the particular packet that will not be reachable. Other fields of the
+              packet have been determined to be irrelevant so they are not listed. The second part of the example is any 
+              eBGP advertisements from peers. In this case, a particular advertisement from a peer with certain BGP community 
+              values attached, and a particular prefix length (/15) is present. Finally, Minesweeper shows the final forwarding 
+              behavior of the network in terms of the interface each router will use to forward the packet.</p>
+            
+            <h3>Fixing the Issue</h3>
+            <p>The problem here is that the eBGP advertisment from AS3 will override the BGP decision process and 
+              influence the as2border2 router to forward to AS3 instead. To fix the problem, we should filter routers
+              internal to our network from external peers. This has already been done in the <b>CAMPUS2</b> example.
+              Reload the configurations and run the query again.
+            </p>
+          </div>
+
+          &nbsp
+          <div class="col-lg-1"></div>
+          <div class="col-lg-8">
+            <div class="panel panel-default raise-effect">
+              <div class="panel-heading">&nbsp</div>
+              <div class="panel-body code-snippet">
+                <pre>
+batfish> init_testrig test_rigs/smt-examples/CAMPUS2
+Uploaded testrig. Parsing now.
+Status: SUCCESS
+PARSING SUMMARY
+STATISTICS
+  Parsing results:
+    Parsed successfully: 13
+
+batfish> get smt-reachability ingressNodeRegex="as2border.*" | 
+finalNodeRegex="as2dept1" | finalIfaceRegex="FastEthernet1/0"
+
+Verified
+batfish>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-11 col-lg-offset-1">
+            <h3>Considering Failures</h3>
+            <p>We can also check that reachability will continue to hold after any <i>k</i> link 
+            failures occur. To do so, we just add an argument specifying the number of failures to consider.
+            Here the tool can prove that reachability will remain for any single failure.</p>   
+          </div>
+
+          &nbsp
+          <div class="col-lg-1"></div>
+          <div class="col-lg-8">
+            <div class="panel panel-default raise-effect">
+              <div class="panel-heading">&nbsp</div>
+              <div class="panel-body code-snippet">
+                <pre>
+batfish> get smt-reachability ingressNodeRegex="as2border.*" | 
+finalNodeRegex="as2dept1" | finalIfaceRegex="FastEthernet1/0" |
+failures=1
+
+Verified
+batfish>
+                </pre>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
-    <section id="members" class="odd-section">
+
+    <section id="members" class="even-section">
       <div class="container">
       <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
           <div class="page-header">
-            <h1>Members</h1>
+            <h1>Contributors</h1>
           </div>
           <div class="row">
             <div class="col-md-4">
               <h2><img src="img/princeton-logo.png" height="50" width="40" alt="Princeton" />Princeton</h2>
               <ul>
                 <li><a href="http://www.cs.princeton.edu/~dpw">David Walker</a> (Faculty)</li>
+                <li><a href="https://www.cs.princeton.edu/people/profile/aartig">Aarti Gupta</a> (Faculty)</li>
                 <li><a href="http://scholar.princeton.edu/rbeckett/">Ryan Beckett</a> (PhD student)</li>
               </ul>
             </div>
-            <div class="col-md-4">
-              <h2><img src="img/microsoft-logo.png" height="40" width="40" alt="Princeton" />Microsoft</h2>
+            <div class="col-md-5">
+              <h2>
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23472 3223.29"><defs><style>.cls-1{fill:#30303c;}.cls-2{fill:#5f92c3;}</style></defs><title>Artboard 2vec</title><path class="cls-1" d="M9043.41,1072.44c0-469.78,354.07-798.4,826.17-798.4s823.85,328.62,823.85,798.4-351.75,798.4-823.85,798.4S9043.41,1542.22,9043.41,1072.44Zm1245,0c0-252.25-164.31-446.64-418.87-446.64-256.87,0-421.19,194.39-421.19,446.64,0,249.93,164.31,446.64,421.19,446.64C10124.14,1519.08,10288.44,1322.37,10288.44,1072.44Z"/><path class="cls-1" d="M5225.85,647.79V300.66H4094.21V1623.88c0,121.69,98.65,220.34,220.34,220.34h911.3V1497.1h-733.6v-261.5h717.4V888.46h-717.4V647.79Z"/><path class="cls-1" d="M7192.23,300.66a173.72,173.72,0,0,0-173.72,173.72V647.79h432.76V1645.2c0,109.91,89.1,199,199,199h199V647.79h430.44V300.66Z"/><path class="cls-1" d="M464.84,300.66V1645.2c0,109.91,89.1,199,199,199h199V300.66Z"/><path class="cls-1" d="M6439.23,300.66V1150L5814.4,300.66H5404.78V1645.2c0,109.91,89.1,199,199,199h199V950.95l652.6,893.28h384.16V300.66Z"/><path class="cls-1" d="M2829.25,300.66a173.72,173.72,0,0,0-173.72,173.72V647.79h432.76V1645.2c0,109.91,89.1,199,199,199h199V647.79h430.44V300.66Z"/><path class="cls-1" d="M8462.56,300.66V1645.2c0,109.91,89.1,199,199,199h199V300.66Z"/><path class="cls-2" d="M13730.35,647.79V300.66H12598.7V1623.88c0,121.69,98.65,220.34,220.34,220.34h911.3V1497.1h-733.6v-261.5h717.4V888.46h-717.4V647.79Z"/><path class="cls-2" d="M14083.2,300.66a173.72,173.72,0,0,0-173.72,173.72V647.79h432.76V1645.2c0,109.91,89.1,199,199,199h199V647.79h430.44V300.66Z"/><polygon class="cls-1" points="12187.2 300.66 11958.53 300.66 11958.53 1121.84 12187.21 1446.82 12187.2 300.66"/><path id="Left" class="cls-1" d="M12187.21,1844.19,11101,300.66h-228.68V1676.25c8.42,94.14,87.5,167.94,183.84,167.94l229.51,0c-101.92,0-184.53-82.67-184.53-184.59L11101,698l228.68,325h0l577,820Z"/><path class="cls-2" d="M11329.72,1023,11101,698l.14,961.6c0,101.93,82.61,184.56,184.53,184.59h44v-5.59Z"/><polygon class="cls-2" points="12187.22 300.66 12187.21 1446.82 11380.66 300.66 11101.06 300.66 12187.21 1844.19 12415.9 1844.19 12415.9 300.95 12187.22 300.66"/><path class="cls-1" d="M2076.25,300.66V1150L1451.42,300.66H1041.8V1645.2c0,109.91,89.1,199,199,199h199V950.95l652.6,893.28H2476.6V300.66Z"/></svg>
+              </h2>
               <ul>
-                <li><a href="http://research.microsoft.com/en-us/um/people/ratul/">Ratul Mahajan</a> (Researcher)</li>
-                <li><a href="http://research.microsoft.com/en-us/um/people/padhye/">Jitu Padhye</a> (Researcher)</li>
+                <li><a href="https://ratul.org/">Ratul Mahajan</a> (CEO and Researcher)</li>
               </ul>
             </div>
             <div class="row">
               <div class="col-md-4">
-                <h2><img src="img/ucla-logo.png" height="50" width="50" alt="UCLA" /> UCLA</h2>
-                <ul>
-                  <li><a href="http://web.cs.ucla.edu/~todd/">Todd Millstein</a> (Faculty)</li>
-                </ul>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section id="publications" class="even-section">
+
+    <section id="publications" class="odd-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
@@ -184,32 +330,26 @@
             <h2>Conference Papers</h2>
             <div>
               <p><a name="event-driven-pldi16"></a>
-                Ryan Beckett, Ratul Mahajan, Todd Millstein, Jitu Padhye, and David Walker.
-                <b>Don't Mind the Gap: Bridging Network-wide Objectives and Device-level
-                Configurations</b>. In <em>ACM SIGCOMM Conference on Communications
-                Architectures, Protocols and Applications (SIGCOMM), Florianopolis , Brazil</em>,
-                August 2016.
-                [&nbsp;<a href="http://research.microsoft.com/en-us/um/people/ratul/papers/sigcomm2016-propane.pdf">paper</a> | 
-                       <a href="http://conferences.sigcomm.org/sigcomm/2016/files/program/sigcomm/Session06-Paper03-DontMind-Ryan-Slides.pdf">slides</a>]
+                Ryan Beckett, Aarti Gupta, Ratul Mahajan, and David Walker.
+                <b>A General Approach to Network Configuration Verification</b>. To appear in <em>ACM SIGCOMM Conference on Communications
+                Architectures, Protocols and Applications (SIGCOMM), Los Angeles , California</em>,
+                August 2017.
+                [&nbsp;<a href="resources/Minesweeper.pdf">paper</a> | 
+                       <a href="resources/Minesweeper.pptx">slides</a>]
               </p>
-            </div>
-            <h2>Technical Reports</h2>
-            <div>
-            </div>
-            <h2>Theses</h2>
-            <div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <footer id="footer" class="odd-section">
+
+    <footer id="footer" class="even-section">
       <div class="container">
         <div class="row">
           <div class="col-lg-10 col-lg-offset-1">
-            <a href="https://github.com/rabeckett/propane/">
-              <div><img src="img/propane-icon.png" class="img-responsive center-block" height="90" width="90" alt="propane-icon" /></div>
-              <div><span class="lead">Propane on Github</span></div>
+            <a href="https://github.com/batfish/batfish/tree/smt">
+              <div><img src="img/minesweeper-icon.png" class="img-responsive center-block" height="90" width="90" alt="minesweeper-icon" /></div>
+              <div><span class="lead">Minesweeper on Github</span></div>
             </a>
           </div>
         </div>
