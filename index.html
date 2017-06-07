@@ -137,7 +137,7 @@ batfish: $ batfish_build_all
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-11 col-lg-offset-1">
             <p>Minesweeper lets you run a number of different <b>"what if"</b> analyses against unmodified router configurations. 
             It can also take into account the possibility of eBGP messages from external peers as well as network link failures.</p>
             
@@ -168,7 +168,7 @@ batfish>
             </div>
           </div>
 
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-11 col-lg-offset-1">
             <p>The first command starts Batfish in interactive mode. The second command instructs Batfish to use the collection of 
               configurations in the CAMPUS1 directory. The CAMPUS1 example directory simply has a single folder named <b>configs/</b>
               that contains all of the router configurations for the network. The topology will be inferred from the configurations.</p>
@@ -217,7 +217,7 @@ as2dist2,FastEthernet1/0 --> as2dept1,FastEthernet0/1
             </div>
           </div>
 
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-11 col-lg-offset-1">
             <p>Here, Minesweeper is indicating that it found an example where one of the border routers will lose connectivity
               to the destination port. First, the example includes the particular packet that will not be reachable. Other fields of the
               packet have been determined to be irrelevant so they are not listed. The second part of the example is any 
@@ -258,7 +258,7 @@ batfish>
             </div>
           </div>
 
-          <div class="col-lg-10 col-lg-offset-1">
+          <div class="col-lg-11 col-lg-offset-1">
             <h3>Considering Failures</h3>
             <p>We can also check that reachability will continue to hold after any <i>k</i> link 
             failures occur. To do so, we just add an argument specifying the number of failures to consider.
