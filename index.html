@@ -199,7 +199,7 @@ Environment Messages:
 as2border2,FastEthernet1/0 (BGP):
   community 3:2:
   community as3_community:
-  prefix: 2.128.0.0/15
+  prefix: 2.128.0.0/25
   protocol metric: 51
 
 Final Forwarding:
@@ -222,7 +222,7 @@ as2dist2,FastEthernet1/0 --> as2dept1,FastEthernet0/1
               to the destination port. First, the example includes the particular packet that will not be reachable. Other fields of the
               packet have been determined to be irrelevant so they are not listed. The second part of the example is any 
               eBGP advertisements from peers. In this case, a particular advertisement from a peer with certain BGP community 
-              values attached, and a particular prefix length (/15) is present. Finally, Minesweeper shows the final forwarding 
+              values attached, and a particular prefix length (/25) is present. Finally, Minesweeper shows the final forwarding 
               behavior of the network in terms of the interface each router will use to forward the packet.</p>
             
             <h3>Fixing the Issue</h3>
